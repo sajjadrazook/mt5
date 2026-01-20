@@ -50,8 +50,8 @@ sleep 2
 # Verify installer existence
 INSTALLER_PATH="/opt/mt5/mt5setup.exe"
 if [ ! -f "$INSTALLER_PATH" ]; then
-    echo "CRITICAL: Custom installer missing!"
-    echo "Ensure justmarkets5setup.exe was copied to build context."
+    echo "CRITICAL: MT5 installer missing!"
+    echo "The installer should have been downloaded during build."
     exit 1
 fi
 

@@ -54,8 +54,8 @@ RUN apt-get update && apt-get install -y --install-recommends \
 # Set working directory
 WORKDIR /opt/mt5
 
-# Copy local installer provided by user
-COPY justmarkets5setup.exe /opt/mt5/mt5setup.exe
+# Download official MetaTrader 5 installer from MetaQuotes
+RUN wget -O /opt/mt5/mt5setup.exe https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe
 
 # Expose VNC (5900) and Web (6080) ports
 EXPOSE 5900 6080

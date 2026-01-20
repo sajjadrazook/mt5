@@ -1,39 +1,43 @@
-# MetaTrader 5 on Ubuntu 25.10 Docker
+# MetaTrader 5 Docker Container
 
-This project runs MetaTrader 5 inside a Docker container using the latest Ubuntu 25.10 and Wine.
+Run MetaTrader 5 inside a Docker container using Ubuntu and Wine, accessible via VNC.
 
 ## Prerequisites
 
-- Docker Desktop installed.
-- A VNC Viewer (e.g., [RealVNC Viewer](https://www.realvnc.com/en/connect/download/viewer/) or [TightVNC](https://www.tightvnc.com/)).
+- Docker and Docker Compose installed
+- A VNC Viewer (e.g., [RealVNC Viewer](https://www.realvnc.com/en/connect/download/viewer/)) for desktop access
 
-- A VNC Viewer (e.g., [RealVNC Viewer](https://www.realvnc.com/en/connect/download/viewer/) or [TightVNC](https://www.tightvnc.com/)).
-- **Important**: This repo includes `justmarkets5setup.exe` which is required for the Docker build. If you clone this repo, ensure this file is present or download the MT5 installer for your broker and rename/update the Dockerfile accordingly.
+## Quick Start
 
-## Security Note
+```bash
+# Clone the repository
+git clone https://github.com/sajjadrazook/mt5.git
+cd mt5
 
-The `docker-compose.yml` file contains default credentials (`admin`/`admin123`) for the VNC/Web interface. **Please change these before deploying to a public environment.**
+# Build and run
+docker-compose up --build -d
+```
 
-## How to Run
+## Access
 
-1.  Open a terminal in this directory.
-2.  Run the following command to build and start the container:
-    ```bash
-    docker-compose up --build -d
-    ```
+- **Web VNC**: Open `http://your-server-ip` in your browser
+- **VNC Client**: Connect to `your-server-ip:5900`
 
-3.  Wait a few seconds for the container to start and initialize services.
+## First Run
 
-## How to Access
+1. Connect via VNC
+2. The MT5 installer will launch automatically
+3. Follow the installation wizard
+4. After installation, MT5 will start automatically on future container starts
 
-1.  Open your VNC Viewer.
-2.  Connect to: `localhost:5900`
-3.  You should see the Ubuntu desktop environment (Fluxbox).
-4.  **First Run**: You will see the MT5 Installer. Click "Next", agree to terms, and "Finish" to install.
-5.  After installation, MT5 should launch automatically.
+## Configuration
+
+The `docker-compose.yml` uses these default settings:
+- Port 80 → Web VNC interface
+- Port 5900 → VNC protocol
 
 ## Notes
 
-- **Ubuntu Version**: This setup uses Ubuntu 25.10 (Questing Quokka).
-- **Data Persistence**: The folder `mt5_data` in your project directory stores the Wine C: drive. Your charts, EAs, and login sessions are saved here.
-- **Restarting**: To stop, run `docker-compose down`. To start again, run `docker-compose up -d`. MT5 will launch automatically if installed.
+- **Wine Version**: Uses Wine 9.0 (stable) to avoid MT5 debugger detection issues
+- **Data Persistence**: Use Docker volumes to persist your MT5 data
+- **Restart Policy**: Container restarts automatically unless stopped manually

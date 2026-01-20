@@ -5,8 +5,8 @@ services:
     volumes:
       - mt5_config:/config
     ports:
-      - "3000:3000"
-      - "8001:8001"
+      - "5900:5900" # VNC Protocol
+      - "80:6080"   # Web VNC (HTTP) - Access via http://your-domain
     environment:
       - CUSTOM_USER=admin
       - PASSWORD=admin123

@@ -3,9 +3,9 @@ services:
     build: .
     container_name: mt5_container
     volumes:
-      - mt5_config:/config
+      - mt5_config:/root/.wine
     ports:
-      - "5900:5900" # VNC Protocol
+      - "5901:5901" # VNC Protocol
       - "80:6080" # Web VNC (HTTP) - Access via http://your-domain
     environment:
       - CUSTOM_USER=admin
@@ -14,3 +14,5 @@ services:
 
 volumes:
   mt5_config:
+
+

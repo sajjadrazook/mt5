@@ -57,6 +57,9 @@ RUN wget -O /opt/mt5/mt5setup.exe https://download.mql5.com/cdn/web/metaquotes.s
 # Copy local user files (EAs, indicators, settings)
 COPY my_mt5_files /opt/mt5/my_mt5_files
 
+# Expose VNC (5900) and Web (6080) ports
+EXPOSE 5900 6080
+
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r$//' /entrypoint.sh

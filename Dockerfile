@@ -42,13 +42,10 @@ RUN mkdir -pm755 /etc/apt/keyrings \
     && wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key \
     && wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/noble/winehq-noble.sources
 
-# Install specific Wine version (9.0) to avoid MT5 debugger detection
-# Newer versions (10.3+) cause "debugger detected" error
+# Install Wine stable (latest available)
+# Note: If MT5 shows "debugger detected" error, may need to try older Wine version
 RUN apt-get update && apt-get install -y --install-recommends \
-    winehq-stable=9.0~noble-1 \
-    wine-stable=9.0~noble-1 \
-    wine-stable-amd64=9.0~noble-1 \
-    wine-stable-i386=9.0~noble-1 \
+    winehq-stable \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory

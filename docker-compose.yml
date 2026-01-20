@@ -1,12 +1,12 @@
 services:
   mt5:
-    image: gmag11/metatrader5_vnc
+    build: .
     container_name: mt5_container
     volumes:
       - mt5_config:/config
     ports:
       - "5900:5900" # VNC Protocol
-      - "80:6080"   # Web VNC (HTTP) - Access via http://your-domain
+      - "80:6080" # Web VNC (HTTP) - Access via http://your-domain
     environment:
       - CUSTOM_USER=admin
       - PASSWORD=admin123

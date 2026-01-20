@@ -68,6 +68,14 @@ RUN wget -O /opt/mt5/mt5setup.exe https://download.mql5.com/cdn/web/metaquotes.s
 # Copy user files
 COPY my_mt5_files /opt/mt5/my_mt5_files
 
+# Copy auto-restore scripts and config
+COPY config.env /opt/mt5/config.env
+COPY auto_restore.sh /opt/mt5/auto_restore.sh
+RUN chmod +x /opt/mt5/auto_restore.sh
+
+# Create backups directory (for local backup files)
+COPY backups /opt/mt5/backups
+
 # Expose ports
 EXPOSE 5901 6080
 

@@ -14,3 +14,7 @@ Desktop.ini
 # IDEs
 .vscode/
 .idea/
+
+# Backup files (exclude large backups, keep small ones if needed)
+# Remove this line if you want to include backups in git
+backups/*.tar.gz

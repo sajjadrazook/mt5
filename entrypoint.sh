@@ -33,8 +33,14 @@ echo "[2/3] Starting Web VNC..."
 websockify --web /usr/share/novnc/ 6080 localhost:5901 &
 sleep 2
 
+# Auto-restore from backup if available
+echo "[3/4] Checking for backup restore..."
+if [ -f /opt/mt5/auto_restore.sh ]; then
+    bash /opt/mt5/auto_restore.sh
+fi
+
 # Launch MT5
-echo "[3/3] Launching MT5..."
+echo "[4/4] Launching MT5..."
 
 # Find existing MT5
 MT5_PATH=$(find "$WINEPREFIX/drive_c/Program Files" -name "terminal64.exe" 2>/dev/null | head -1)

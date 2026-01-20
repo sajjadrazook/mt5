@@ -1,2 +1,4 @@
-# Ignore backup files (they contain sensitive account data)
+# Keep this folder tracked but ignore large backup files
+# Backup files are stored here for auto-restore
+# To include a backup: rename it to NOT end with .tar.gz
 *.tar.gz

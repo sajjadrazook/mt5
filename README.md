@@ -42,8 +42,58 @@ The `docker-compose.yml` uses these default settings:
 - **Data Persistence**: Use Docker volumes to persist your MT5 data
 - **Restart Policy**: Container restarts automatically unless stopped manually
 
+## Updating (Safe Update)
+
+To update the container while **preserving your MT5 data, accounts, and Wine configuration**:
+
+```bash
+# Option 1: Use the update script (recommended)
+chmod +x update.sh
+./update.sh
+
+# Option 2: Manual update
+git pull
+docker-compose down      # ⚠️ Do NOT use -v flag!
+docker-compose build
+docker-compose up -d
+```
+
+> ⚠️ **IMPORTANT**: Never use `docker-compose down -v` as it deletes all your data!
+
 ## Auto-Install & State Transfer
 
 - **Silent Install**: MT5 now installs automatically without asking for confirmation.
 - **Sync Your Files**: Put your EAs, Indicators, or Settings in the `my_mt5_files/` folder in this repository. They will be automatically copied to MT5 when the server starts.
+
+## Full State Migration (Local → Server)
+
+To transfer **everything** (Wine, MT5, accounts, settings) from local Docker to server:
+
+### On Local Machine (Windows/WSL):
+```bash
+# Create backup
+chmod +x backup.sh
+./backup.sh
+```
+
+### Transfer to Server:
+```bash
+scp backups/mt5_backup_*.tar.gz user@your-server:~/mt5/backups/
+```
+
+### On Server:
+```bash
+cd ~/mt5
+chmod +x restore.sh
+./restore.sh
+```
+
+This will restore your exact MT5 state including:
+- ✅ Wine configuration
+- ✅ MT5 installation
+- ✅ Trading accounts
+- ✅ Expert Advisors
+- ✅ Indicators & scripts
+- ✅ All settings
+
 

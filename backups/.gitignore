@@ -1,0 +1,2 @@
+# Ignore backup files (they contain sensitive account data)
+*.tar.gz

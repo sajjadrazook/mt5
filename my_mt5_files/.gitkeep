@@ -1,0 +1,8 @@
+This directory is for your custom MetaTrader 5 files.
+Any files you place here will be automatically copied to your MT5 installation on the server.
+
+Recommended structure:
+- MQL5/Experts/
+- MQL5/Indicators/
+- MQL5/Scripts/
+- profiles/

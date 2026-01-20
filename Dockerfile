@@ -54,8 +54,8 @@ WORKDIR /opt/mt5
 # Download official MetaTrader 5 installer from MetaQuotes
 RUN wget -O /opt/mt5/mt5setup.exe https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe
 
-# Expose VNC (5900) and Web (6080) ports
-EXPOSE 5900 6080
+# Copy local user files (EAs, indicators, settings)
+COPY my_mt5_files /opt/mt5/my_mt5_files
 
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh

@@ -100,9 +100,38 @@ if [ -n "$MT5_PATH" ]; then
     wine "$MT5_PATH" /portable &
 else
     echo "MT5 not installed."
-    echo "Launching Custom Installer..."
-    echo "PLEASE CONNECT VIA VNC (localhost:5900) TO INSTALL."
-    wine "$INSTALLER_PATH" &
+    echo "Using silent installer..."
+    # /auto flag for silent installation
+    wine "$INSTALLER_PATH" /auto &
+    
+    # Wait for installation to complete (loop check)
+    echo "Waiting for installation to complete..."
+    for i in {1..30}; do
+        if [ -n "$(find "$WINEPREFIX/drive_c/Program Files" -name "terminal.exe" -print -quit 2>/dev/null)" ]; then
+            echo "Installation detected!"
+            break
+        fi
+        sleep 2
+    done
+fi
+
+# 6. Sync User Files (State Transfer)
+USER_FILES_SOURCE="/opt/mt5/my_mt5_files"
+MT5_INSTALL_DIR="$WINEPREFIX/drive_c/Program Files/MetaTrader 5"
+
+if [ -d "$USER_FILES_SOURCE" ] && [ -d "$MT5_INSTALL_DIR" ]; then
+    echo "Syncing user files from $USER_FILES_SOURCE..."
+    cp -rn "$USER_FILES_SOURCE/"* "$MT5_INSTALL_DIR/" || true
+    echo "Sync complete."
+fi
+
+# 7. Launch MT5
+MT5_PATH=$(find "$WINEPREFIX/drive_c/Program Files" -name "terminal.exe" -print -quit 2>/dev/null)
+if [ -n "$MT5_PATH" ]; then
+    echo "Launching MT5..."
+    wine "$MT5_PATH" /portable &
+else
+    echo "ERROR: MT5 executable not found even after install attempt."
 fi
 
 # Keep container running

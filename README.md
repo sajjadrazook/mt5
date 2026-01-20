@@ -41,3 +41,9 @@ The `docker-compose.yml` uses these default settings:
 - **Wine Version**: Uses Wine 9.0 (stable) to avoid MT5 debugger detection issues
 - **Data Persistence**: Use Docker volumes to persist your MT5 data
 - **Restart Policy**: Container restarts automatically unless stopped manually
+
+## Auto-Install & State Transfer
+
+- **Silent Install**: MT5 now installs automatically without asking for confirmation.
+- **Sync Your Files**: Put your EAs, Indicators, or Settings in the `my_mt5_files/` folder in this repository. They will be automatically copied to MT5 when the server starts.
+

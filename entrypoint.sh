@@ -76,8 +76,8 @@ chmod 1777 /run/wine
 export TMPDIR=/run/wine
 export XDG_RUNTIME_DIR=/run/wine
 
-# Set WINEPREFIX explicitly and initialize (32-bit for MT5 compatibility)
-export WINEPREFIX=/root/.wine
+# Set WINEPREFIX to persistent volume location
+export WINEPREFIX=/config/.wine
 export WINEARCH=win32
 wineboot --init 2>/dev/null
 # Wait for wineserver to settle

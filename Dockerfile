@@ -3,8 +3,8 @@ FROM ubuntu:24.04
 # Prevent interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Environment variables
-ENV WINEPREFIX=/root/.wine
+# Environment variables - Use /config for persistence with Docker volumes
+ENV WINEPREFIX=/config/.wine
 ENV WINEARCH=win32
 ENV DISPLAY=:0.0
 

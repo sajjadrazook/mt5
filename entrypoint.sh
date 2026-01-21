@@ -18,7 +18,7 @@ echo "=========================================="
 export HOME=/root
 export DISPLAY=:1
 export WINEPREFIX=/root/.wine
-export WINEARCH=win32
+export WINEARCH=win64
 
 # Setup XDG runtime
 mkdir -p "$XDG_RUNTIME_DIR"

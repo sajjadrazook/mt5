@@ -61,7 +61,7 @@ RUN echo "" | vncpasswd -f > /root/.vnc/passwd && chmod 600 /root/.vnc/passwd
 
 # Wine environment
 ENV WINEPREFIX=/root/.wine
-ENV WINEARCH=win32
+ENV WINEARCH=win64
 
 # Download MT5 installer
 WORKDIR /opt/mt5

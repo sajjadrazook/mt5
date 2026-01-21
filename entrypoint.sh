@@ -19,6 +19,7 @@ export HOME=/root
 export DISPLAY=:1
 export WINEPREFIX=/root/.wine
 export WINEARCH=win64
+export WINEDEBUG=-all
 
 # Setup XDG runtime
 mkdir -p "$XDG_RUNTIME_DIR"

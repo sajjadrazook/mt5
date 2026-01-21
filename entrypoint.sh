@@ -33,7 +33,7 @@ rm -rf "$XDG_RUNTIME_DIR"/*
 # Start VNC Server
 # Start VNC Server
 echo "[1/3] Starting VNC Desktop..."
-vncserver :1 -geometry 1280x720 -depth 24 -localhost no -verbose
+vncserver :1 -geometry 1280x720 -depth 24 -localhost no -verbose -xstartup /root/.vnc/xstartup
 
 # Wait for VNC to start
 echo "Waiting for VNC to start..."

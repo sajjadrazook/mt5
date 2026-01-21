@@ -55,7 +55,7 @@ RUN mkdir -p /root/.vnc && \
     echo "#!/bin/bash" > /root/.vnc/xstartup && \
     echo "unset SESSION_MANAGER" >> /root/.vnc/xstartup && \
     echo "unset DBUS_SESSION_BUS_ADDRESS" >> /root/.vnc/xstartup && \
-    echo "exec startxfce4 &" >> /root/.vnc/xstartup && \
+    echo "startxfce4" >> /root/.vnc/xstartup && \
     chmod +x /root/.vnc/xstartup
 
 # Set VNC password (empty for no password)

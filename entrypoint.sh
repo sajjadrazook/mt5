@@ -20,8 +20,15 @@ export DISPLAY=:1
 export WINEPREFIX=/root/.wine
 export WINEARCH=win32
 
-# Remove old VNC locks
-rm -rf /tmp/.X1-lock /tmp/.X11-unix/X1 2>/dev/null
+# Setup XDG runtime
+mkdir -p "$XDG_RUNTIME_DIR"
+chmod 700 "$XDG_RUNTIME_DIR"
+
+# Remove old VNC locks and sockets
+echo "Cleaning up old VNC locks..."
+vncserver -kill :1 >/dev/null 2>&1 || true
+rm -rf /tmp/.X1-lock /tmp/.X11-unix/X1 /root/.vnc/*.pid /root/.vnc/*.log 2>/dev/null
+rm -rf "$XDG_RUNTIME_DIR"/*
 
 # Start VNC Server
 echo "[1/3] Starting VNC Desktop..."

@@ -7,7 +7,9 @@ ENV HOME=/root
 # Environment variables for display
 ENV DISPLAY=:1
 ENV VNC_PORT=5901
+ENV VNC_PORT=5901
 ENV NO_VNC_PORT=6080
+ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 
 # Enable 32-bit architecture
 RUN dpkg --add-architecture i386

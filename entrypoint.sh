@@ -31,9 +31,27 @@ rm -rf /tmp/.X1-lock /tmp/.X11-unix/X1 /root/.vnc/*.pid /root/.vnc/*.log 2>/dev/
 rm -rf "$XDG_RUNTIME_DIR"/*
 
 # Start VNC Server
+# Start VNC Server
 echo "[1/3] Starting VNC Desktop..."
-vncserver :1 -geometry 1280x720 -depth 24 -localhost no
-sleep 3
+vncserver :1 -geometry 1280x720 -depth 24 -localhost no -verbose
+
+# Wait for VNC to start
+echo "Waiting for VNC to start..."
+for i in {1..10}; do
+    if [ -S /tmp/.X11-unix/X1 ]; then
+        echo "✅ VNC started successfully."
+        break
+    fi
+    echo "   ...waiting ($i/10)"
+    sleep 1
+done
+
+if [ ! -S /tmp/.X11-unix/X1 ]; then
+    echo "❌ VNC failed to start!"
+    cat /root/.vnc/*.log
+    exit 1
+fi
+
 
 # Start noVNC (Web access)
 echo "[2/3] Starting Web VNC..."
